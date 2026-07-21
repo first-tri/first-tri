@@ -350,45 +350,53 @@
       errorEl.classList.remove('visible');
       submitBtn.disabled = true;
 
-      const data = Object.fromEntries(new FormData(form));
-      const count = Number(data.interested_count);
+      try {
+        const data = Object.fromEntries(new FormData(form));
+        const count = Number(data.interested_count);
 
-      if (!Number.isInteger(count) || count < 1) {
-        errorEl.textContent = 'Indique combien de personnes seraient intéressées (minimum 1).';
+        if (!Number.isInteger(count) || count < 1) {
+          errorEl.textContent = 'Indique combien de personnes seraient intéressées (minimum 1).';
+          errorEl.classList.add('visible');
+          submitBtn.disabled = false;
+          return;
+        }
+
+        if (!supabase) {
+          errorEl.textContent = 'Client Supabase non initialisé.';
+          errorEl.classList.add('visible');
+          submitBtn.disabled = false;
+          return;
+        }
+
+        const result = await supabase.from('signups').insert({
+          prenom: data.prenom.trim(),
+          email: data.email.trim().toLowerCase(),
+          ville: data.ville.trim(),
+          group_size: data.group_size,
+          already_done: data.already_done,
+          interested_count: count,
+          event_name: EVENT.name,
+          distance: EVENT.distance,
+          preferred_date: EVENT.date,
+        });
+
+        console.log('Supabase result:', JSON.stringify(result));
+
+        if (result.error) {
+          errorEl.textContent = 'Erreur Supabase : ' + (result.error.message || result.error.code || JSON.stringify(result.error));
+          errorEl.classList.add('visible');
+          submitBtn.disabled = false;
+          return;
+        }
+
+        form.style.display = 'none';
+        success.classList.add('visible');
+
+      } catch (err) {
+        errorEl.textContent = 'Exception JS : ' + err.message;
         errorEl.classList.add('visible');
         submitBtn.disabled = false;
-        return;
       }
-
-      if (!supabase) {
-        errorEl.textContent = 'Client Supabase non initialisé — voir la bannière d\'erreur au-dessus.';
-        errorEl.classList.add('visible');
-        submitBtn.disabled = false;
-        return;
-      }
-
-      const { error } = await supabase.from('signups').insert({
-        prenom: data.prenom.trim(),
-        email: data.email.trim().toLowerCase(),
-        ville: data.ville.trim(),
-        group_size: data.group_size,
-        already_done: data.already_done,
-        interested_count: count,
-        event_name: EVENT.name,
-        distance: EVENT.distance,
-        preferred_date: EVENT.date,
-      });
-
-      if (error) {
-        console.error(error);
-        errorEl.textContent = 'Erreur Supabase : ' + (error.message || error.code || JSON.stringify(error));
-        errorEl.classList.add('visible');
-        submitBtn.disabled = false;
-        return;
-      }
-
-      form.style.display = 'none';
-      success.classList.add('visible');
     });
   </script>
 
