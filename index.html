@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>First Tri — Toulouse Triathlon XS 2026</title>
+  <meta name="description" content="Fais ton premier triathlon XS à Toulouse avec ton groupe. Matériel et préparation inclus.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #fafafa;
+      --text: #111;
+      --muted: #666;
+      --border: #e8e8e8;
+      --accent: #0a6e5c;
+      --accent-hover: #085a4b;
+      --highlight-bg: #f0faf8;
+      --highlight-border: #b8ddd4;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 560px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    header { padding: 32px 0 0; }
+
+    .logo {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .hero { padding: 72px 0 40px; }
+
+    h1 {
+      font-size: clamp(2rem, 6vw, 2.75rem);
+      font-weight: 700;
+      line-height: 1.12;
+      letter-spacing: -0.03em;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+    }
+
+    .hero p {
+      font-size: 1.125rem;
+      color: var(--muted);
+      margin-bottom: 32px;
+      max-width: 440px;
+    }
+
+    .event-card {
+      padding: 20px 24px;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      margin-bottom: 32px;
+    }
+
+    .event-card .event-name {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .event-card .event-meta {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .event-card .event-format {
+      font-size: 13px;
+      color: var(--accent);
+      font-weight: 500;
+      margin-top: 8px;
+    }
+
+    .event-card a {
+      display: inline-block;
+      margin-top: 12px;
+      font-size: 13px;
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .event-card a:hover { text-decoration: underline; }
+
+    .cta {
+      display: inline-block;
+      padding: 16px 28px;
+      font: inherit;
+      font-size: 15px;
+      font-weight: 600;
+      color: #fff;
+      background: var(--accent);
+      border: none;
+      border-radius: 8px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .cta:hover { background: var(--accent-hover); }
+
+    .form-section { padding-bottom: 80px; }
+
+    .form-section h2 {
+      font-size: 1.125rem;
+      font-weight: 600;
+      margin-bottom: 24px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    label {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    label span.hint {
+      font-weight: 400;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    input, select {
+      width: 100%;
+      padding: 14px 16px;
+      font: inherit;
+      font-size: 15px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: #fff;
+      color: var(--text);
+      transition: border-color 0.15s;
+    }
+
+    input:focus, select:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    .highlight {
+      padding: 20px;
+      background: var(--highlight-bg);
+      border: 1px solid var(--highlight-border);
+      border-radius: 10px;
+    }
+
+    .highlight label {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--accent);
+    }
+
+    button[type="submit"] {
+      margin-top: 8px;
+      padding: 16px 24px;
+      font: inherit;
+      font-size: 15px;
+      font-weight: 600;
+      color: #fff;
+      background: var(--accent);
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    button[type="submit"]:hover { background: var(--accent-hover); }
+    button[type="submit"]:disabled { opacity: 0.6; cursor: not-allowed; }
+
+    .error {
+      display: none;
+      padding: 12px 16px;
+      font-size: 14px;
+      color: #b42318;
+      background: #fef3f2;
+      border: 1px solid #fecdca;
+      border-radius: 8px;
+    }
+
+    .error.visible { display: block; }
+
+    .success {
+      display: none;
+      padding: 32px;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      text-align: center;
+    }
+
+    .success.visible { display: block; }
+
+    .success h2 { font-size: 1.25rem; margin-bottom: 8px; }
+    .success p { font-size: 15px; color: var(--muted); }
+
+    footer {
+      padding: 32px 0 48px;
+      border-top: 1px solid var(--border);
+    }
+
+    footer p { font-size: 13px; color: #999; }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <div class="logo">First Tri</div>
+    </header>
+
+    <section class="hero">
+      <h1>Ton premier triathlon.<br>Sans acheter de vélo.</h1>
+      <p>
+        Réunis ton groupe pour le triathlon XS de Toulouse.<br>
+        On s'occupe du matériel et de la préparation.
+      </p>
+
+      <div class="event-card" id="event-card"></div>
+
+      <a class="cta" href="#signup">Je veux faire ce triathlon avec mon groupe</a>
+    </section>
+
+    <section class="form-section" id="signup">
+      <h2>Dis-nous en un peu plus</h2>
+
+      <div class="error" id="error"></div>
+
+      <form id="signup-form">
+        <label>
+          Prénom
+          <input type="text" name="prenom" required autocomplete="given-name">
+        </label>
+
+        <label>
+          Email
+          <input type="email" name="email" required autocomplete="email">
+        </label>
+
+        <label>
+          Ville
+          <input type="text" name="ville" required autocomplete="address-level2" placeholder="Ex. Toulouse, Paris…">
+        </label>
+
+        <label>
+          Nombre de personnes dans le groupe
+          <select name="group_size" required>
+            <option value="">Sélectionne</option>
+            <option value="2-3">2 à 3</option>
+            <option value="4-6">4 à 6</option>
+            <option value="7-10">7 à 10</option>
+            <option value="11-15">11 à 15</option>
+            <option value="16-20">16 à 20</option>
+            <option value="20+">Plus de 20</option>
+          </select>
+        </label>
+
+        <div class="highlight">
+          <label>
+            Combien de personnes seraient potentiellement intéressées avec toi ?
+            <span class="hint">C'est l'info la plus importante pour nous.</span>
+            <input type="number" name="interested_count" min="1" max="100" required placeholder="Ex. 6">
+          </label>
+        </div>
+
+        <label>
+          As-tu déjà fait un triathlon ?
+          <select name="already_done" required>
+            <option value="">Sélectionne</option>
+            <option value="non">Non, jamais</option>
+            <option value="oui-1">Oui, une fois</option>
+            <option value="oui-plusieurs">Oui, plusieurs fois</option>
+          </select>
+        </label>
+
+        <button type="submit">Envoyer</button>
+      </form>
+
+      <div class="success" id="success">
+        <h2>Merci !</h2>
+        <p>On te recontacte très vite pour organiser le groupe sur le Toulouse Triathlon XS.</p>
+      </div>
+    </section>
+
+    <footer>
+      <p>First Tri — 2026 · France</p>
+    </footer>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config.js"></script>
+  <script>
+    document.getElementById('event-card').innerHTML = `
+      <div class="event-name">${EVENT.name} · ${EVENT.distance}</div>
+      <div class="event-meta">
+        ${EVENT.date}<br>
+        ${EVENT.location}
+      </div>
+      <div class="event-format">${EVENT.format}</div>
+      <a href="${EVENT.url}" target="_blank" rel="noopener">Voir la course sur Active.com →</a>
+    `;
+
+    const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    const form = document.getElementById('signup-form');
+    const success = document.getElementById('success');
+    const errorEl = document.getElementById('error');
+    const submitBtn = form.querySelector('button[type="submit"]');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      errorEl.classList.remove('visible');
+      submitBtn.disabled = true;
+
+      const data = Object.fromEntries(new FormData(form));
+      const count = Number(data.interested_count);
+
+      if (!Number.isInteger(count) || count < 1) {
+        errorEl.textContent = 'Indique combien de personnes seraient intéressées (minimum 1).';
+        errorEl.classList.add('visible');
+        submitBtn.disabled = false;
+        return;
+      }
+
+      const { error } = await supabase.from('signups').insert({
+        prenom: data.prenom.trim(),
+        email: data.email.trim().toLowerCase(),
+        ville: data.ville.trim(),
+        group_size: data.group_size,
+        already_done: data.already_done,
+        interested_count: count,
+        event_name: EVENT.name,
+        distance: EVENT.distance,
+        preferred_date: EVENT.date,
+      });
+
+      if (error) {
+        console.error(error);
+        errorEl.textContent = 'Erreur lors de l\'envoi. Réessaie dans un instant.';
+        errorEl.classList.add('visible');
+        submitBtn.disabled = false;
+        return;
+      }
+
+      form.style.display = 'none';
+      success.classList.add('visible');
+    });
+  </script>
+
+</body>
+</html>
