@@ -317,17 +317,28 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="config.js"></script>
   <script>
-    document.getElementById('event-card').innerHTML = `
-      <div class="event-name">${EVENT.name} · ${EVENT.distance}</div>
-      <div class="event-meta">
-        ${EVENT.date}<br>
-        ${EVENT.location}
-      </div>
-      <div class="event-format">${EVENT.format}</div>
-      <a href="${EVENT.url}" target="_blank" rel="noopener">Voir la course sur Active.com →</a>
-    `;
+    try {
+      document.getElementById('event-card').innerHTML = `
+        <div class="event-name">${EVENT.name} · ${EVENT.distance}</div>
+        <div class="event-meta">
+          ${EVENT.date}<br>
+          ${EVENT.location}
+        </div>
+        <div class="event-format">${EVENT.format}</div>
+        <a href="${EVENT.url}" target="_blank" rel="noopener">Voir la course sur Active.com →</a>
+      `;
+    } catch (e) {
+      document.getElementById('error').textContent = 'Erreur init EVENT : ' + e.message;
+      document.getElementById('error').classList.add('visible');
+    }
 
-    const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    let supabase;
+    try {
+      supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    } catch (e) {
+      document.getElementById('error').textContent = 'Erreur init Supabase : ' + e.message;
+      document.getElementById('error').classList.add('visible');
+    }
 
     const form = document.getElementById('signup-form');
     const success = document.getElementById('success');
@@ -349,6 +360,13 @@
         return;
       }
 
+      if (!supabase) {
+        errorEl.textContent = 'Client Supabase non initialisé — voir la bannière d\'erreur au-dessus.';
+        errorEl.classList.add('visible');
+        submitBtn.disabled = false;
+        return;
+      }
+
       const { error } = await supabase.from('signups').insert({
         prenom: data.prenom.trim(),
         email: data.email.trim().toLowerCase(),
@@ -363,7 +381,7 @@
 
       if (error) {
         console.error(error);
-        errorEl.textContent = 'Erreur lors de l\'envoi. Réessaie dans un instant.';
+        errorEl.textContent = 'Erreur Supabase : ' + (error.message || error.code || JSON.stringify(error));
         errorEl.classList.add('visible');
         submitBtn.disabled = false;
         return;
