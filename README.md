@@ -116,7 +116,7 @@ git push -u origin main
 4. Attends 1–2 min
 
 Ton site sera live sur :  
-**https://TON-USERNAME.github.io/first-tri/**
+**https://first-tri.github.io/first-tri/**
 
 Teste le formulaire en production → vérifie Supabase.
 
