@@ -332,9 +332,9 @@
       document.getElementById('error').classList.add('visible');
     }
 
-    let supabase;
+    let sbClient;
     try {
-      supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+      sbClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
     } catch (e) {
       document.getElementById('error').textContent = 'Erreur init Supabase : ' + e.message;
       document.getElementById('error').classList.add('visible');
@@ -361,14 +361,14 @@
           return;
         }
 
-        if (!supabase) {
+        if (!sbClient) {
           errorEl.textContent = 'Client Supabase non initialisé.';
           errorEl.classList.add('visible');
           submitBtn.disabled = false;
           return;
         }
 
-        const result = await supabase.from('signups').insert({
+        const result = await sbClient.from('signups').insert({
           prenom: data.prenom.trim(),
           email: data.email.trim().toLowerCase(),
           ville: data.ville.trim(),
