@@ -344,6 +344,37 @@
       margin-top: 4px;
     }
 
+    /* ─── GROUP PHOTO ─────────────────────────────── */
+    .group-wrap {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .group-section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 100px 40px;
+    }
+
+    @media (max-width: 640px) { .group-section { padding: 64px 20px; } }
+
+    .group-photo {
+      margin-top: 48px;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+
+    .group-photo img {
+      width: 100%;
+      display: block;
+    }
+
+    .group-caption {
+      max-width: 560px;
+    }
+
     /* ─── EVENT ───────────────────────────────────── */
     .event-wrap {
       padding: 100px 40px;
@@ -662,35 +693,49 @@
   <div class="bikes-wrap">
     <div class="bikes-section">
       <div class="section-label">Materiel fourni</div>
-      <div class="section-title">Des velos<br>de competition.</div>
+      <div class="section-title">Le materiel<br>pour debuter.</div>
       <div class="bikes-grid">
         <div class="bike-card">
           <div class="bike-img">
-            <img src="https://contents.mediadecathlon.com/p2929748/k$5c0641a259a55a6c407ebf70f11ed186/picture.jpg?format=auto&f=800x0" alt="Van Rysel RCR-X TRI" loading="lazy">
+            <img src="https://contents.mediadecathlon.com/p2021839/k$9ef77d1c20368b5fd1bd0e44805b47a6/picture.jpg?format=auto" alt="Velo route Triban RC120" loading="lazy">
           </div>
           <div class="bike-info">
-            <div class="bike-name">RCR-X TRI</div>
+            <div class="bike-name">RC120</div>
+            <div class="bike-brand">Triban</div>
+          </div>
+        </div>
+        <div class="bike-card">
+          <div class="bike-img">
+            <img src="https://contents.mediadecathlon.com/p1567326/k$d379db62afb8a84ad52e383e08bf083a/picture.jpg?format=auto" alt="Casque velo Roadr 100" loading="lazy">
+          </div>
+          <div class="bike-info">
+            <div class="bike-name">Roadr 100</div>
             <div class="bike-brand">Van Rysel</div>
           </div>
         </div>
         <div class="bike-card">
           <div class="bike-img">
-            <img src="https://contents.mediadecathlon.com/p2760749/k$7b4f633a22f1ff1f18e54666a25ec594/picture.jpg?format=auto&f=800x0" alt="Van Rysel XCR UCI" loading="lazy">
+            <img src="https://contents.mediadecathlon.com/p2191565/k$81fe94d5572b8e6dff37c90695ac5526/picture.jpg?format=auto" alt="Combinaison neoprene triathlon SD" loading="lazy">
           </div>
           <div class="bike-info">
-            <div class="bike-name">XCR UCI</div>
+            <div class="bike-name">Combinaison SD</div>
             <div class="bike-brand">Van Rysel</div>
           </div>
         </div>
-        <div class="bike-card">
-          <div class="bike-img">
-            <img src="https://contents.mediadecathlon.com/p2800986/k$c01ba24348f018e6bd00862448faedd0/picture.jpg?format=auto&f=800x0" alt="Van Rysel XCR TRI RIVAL AXS" loading="lazy">
-          </div>
-          <div class="bike-info">
-            <div class="bike-name">XCR TRI</div>
-            <div class="bike-brand">Van Rysel · RIVAL AXS</div>
-          </div>
-        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GROUP PHOTO -->
+  <div class="group-wrap">
+    <div class="group-section">
+      <div class="group-caption">
+        <div class="section-label">L'ambiance</div>
+        <div class="section-title">Le vrai objectif :<br>finir ensemble, en riant.</div>
+        <p class="why-text">Pas besoin d'etre un athlete pour vivre ce moment. Le triathlon, c'est surtout une bonne excuse pour se motiver entre amis et franchir la ligne d'arrivee ensemble.</p>
+      </div>
+      <div class="group-photo">
+        <img src="images/groupe-triathlon.jpg" alt="Groupe d'amis souriants apres un triathlon" loading="lazy">
       </div>
     </div>
   </div>
